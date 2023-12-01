@@ -5,9 +5,9 @@ import 'package:medicaux_backend/models/staff.dart';
 
 /// data source form MySQL
 
-class DoctorSource {
+class StaffSource {
   /// initializing
-  const DoctorSource(
+  const StaffSource(
     this.sqlClient,
   );
 
@@ -25,15 +25,14 @@ class DoctorSource {
 
   ///add a list to the database
   Future<void> addList(String name, String role) async {
-    final sqlQuery =
-        'INSERT INTO staff (name,speciality) VALUES ("$name","$role");';
+    final sqlQuery = 'INSERT INTO staff (name,role) VALUES ("$name","$role");';
     await sqlClient.execute(sqlQuery);
   }
 
   ///update the list
   Future<void> updateList(String name, String role, String staffId) async {
     final sqlQuery =
-        'UPDATE staff SET name = "$name" , speciality = "$role" where staffId = $staffId;';
+        'UPDATE staff SET name = "$name" , role = "$role" where staffId = $staffId;';
     await sqlClient.execute(sqlQuery);
   }
 

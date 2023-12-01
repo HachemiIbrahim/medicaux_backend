@@ -5,9 +5,9 @@ import 'package:medicaux_backend/models/traitement.dart';
 
 /// data source form MySQL
 
-class DoctorSource {
+class TraitementSource {
   /// initializing
-  const DoctorSource(
+  const TraitementSource(
     this.sqlClient,
   );
 
@@ -43,7 +43,7 @@ class DoctorSource {
   ///delete a list
   Future<void> deleteList(String traitementId) async {
     final sqlQuery =
-        'DELETE FROM appointment WHERE traitementId = $traitementId;';
+        'DELETE FROM traitement WHERE traitementId = $traitementId;';
     await sqlClient.execute(sqlQuery);
   }
 

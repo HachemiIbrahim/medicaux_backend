@@ -5,9 +5,9 @@ import 'package:medicaux_backend/models/appointment.dart';
 
 /// data source form MySQL
 
-class DoctorSource {
+class AppointementSource {
   /// initializing
-  const DoctorSource(
+  const AppointementSource(
     this.sqlClient,
   );
 
