@@ -32,15 +32,15 @@ class PatientSource {
 
   ///update the list
   Future<void> updateList(
-      String name, int age, String phoneNumber, String id) async {
+      String name, int age, String phoneNumber, String patientId) async {
     final sqlQuery =
-        'UPDATE patient SET name = "$name" , age = $age , phone_number = "$phoneNumber" where id = $id;';
+        'UPDATE patient SET name = "$name" , age = $age , phone_number = "$phoneNumber" where patientId = $patientId;';
     await sqlClient.execute(sqlQuery);
   }
 
   ///delete a list
-  Future<void> deleteList(String id) async {
-    final sqlQuery = 'DELETE FROM patient WHERE id = $id;';
+  Future<void> deleteList(String patientId) async {
+    final sqlQuery = 'DELETE FROM patient WHERE patientId = $patientId;';
     await sqlClient.execute(sqlQuery);
   }
 
