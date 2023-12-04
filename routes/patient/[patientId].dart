@@ -6,9 +6,9 @@ import 'package:medicaux_backend/source/patient_source.dart';
 Future<Response> onRequest(RequestContext context, String patientId) async {
   switch (context.request.method) {
     case HttpMethod.patch:
-      return _updateList(context, patientId);
+      return _updatePatient(context, patientId);
     case HttpMethod.delete:
-      return _deleteList(context, patientId);
+      return _deletePatient(context, patientId);
     // ignore: no_default_cases
     default:
       return Future.value(Response(statusCode: HttpStatus.methodNotAllowed));
@@ -16,7 +16,8 @@ Future<Response> onRequest(RequestContext context, String patientId) async {
 }
 
 ///update the list using it's id
-Future<Response> _updateList(RequestContext context, String patientId) async {
+Future<Response> _updatePatient(
+    RequestContext context, String patientId) async {
   final dataRepository = context.read<PatientSource>();
   final body = await context.request.json() as Map<String, dynamic>;
   final name = body['name'] as String;
@@ -27,7 +28,8 @@ Future<Response> _updateList(RequestContext context, String patientId) async {
 }
 
 ///delete a list with it's id
-Future<Response> _deleteList(RequestContext context, String patientId) async {
+Future<Response> _deletePatient(
+    RequestContext context, String patientId) async {
   final dataRepository = context.read<PatientSource>();
   await dataRepository.deleteList(patientId);
   return Response(statusCode: HttpStatus.accepted);

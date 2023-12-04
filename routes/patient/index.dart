@@ -22,7 +22,6 @@ Future<Response> _getPatient(RequestContext context) async {
 }
 
 Future<Response> _createPatient(RequestContext context) async {
-  print(await context.request.body);
   final dataRepository = context.read<PatientSource>();
   final body = await context.request.json() as Map<String, dynamic>;
   final name = body['name'] as String;
