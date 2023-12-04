@@ -25,18 +25,17 @@ class TraitementSource {
   }
 
   ///add a list to the database
-  Future<void> addList(
-      String patientId, String doctorId, String description) async {
+  Future<void> addList(int patientId, int doctorId, String description) async {
     final sqlQuery =
-        'INSERT INTO traitement (patientId,doctorId,description) VALUES ("$patientId","$doctorId","$description");';
+        'INSERT INTO traitement (patientId,doctorId,description) VALUES ($patientId,$doctorId,"$description");';
     await sqlClient.execute(sqlQuery);
   }
 
   ///update the list
-  Future<void> updateList(String patientId, String doctorId, String description,
+  Future<void> updateList(int patientId, int doctorId, String description,
       String traitementId) async {
     final sqlQuery =
-        'UPDATE traitement SET patientId = "$patientId" , doctorId = "$doctorId",description = "$description" where traitementId = $traitementId;';
+        'UPDATE traitement SET patientId = $patientId , doctorId = $doctorId ,description = "$description" where traitementId = $traitementId;';
     await sqlClient.execute(sqlQuery);
   }
 
