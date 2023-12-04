@@ -22,7 +22,7 @@ class MySQLClient {
       port: 3306,
       userName: 'root',
       password: 'ibra2004',
-      databaseName: 'mytasklist',
+      databaseName: 'medicaux',
       secure: true,
     );
     await _connection?.connect();
