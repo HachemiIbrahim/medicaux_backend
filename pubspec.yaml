@@ -8,6 +8,7 @@ environment:
 
 dependencies:
   dart_frog: ^1.0.0
+  intl: ^0.18.1
   mysql_client: ^0.0.27
 
 dev_dependencies:

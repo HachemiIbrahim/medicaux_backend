@@ -1,5 +1,6 @@
 // ignore_for_file: lines_longer_than_80_chars
 
+import 'package:intl/intl.dart';
 import 'package:medicaux_backend/database/sql_client.dart';
 import 'package:medicaux_backend/models/appointment.dart';
 
@@ -26,17 +27,21 @@ class AppointementSource {
 
   ///add a list to the database
   Future<void> addList(
-      String patientId, String doctorId, String appointmentDate) async {
+      int patientId, int doctorId, String appointmentDate) async {
+    final formatedDate =
+        DateFormat('yyyy-MM-dd HH:mm:ss').parse(appointmentDate);
     final sqlQuery =
-        'INSERT INTO appointment (patientId,doctorId,appointment_date) VALUES ("$patientId","$doctorId","$appointmentDate");';
+        'INSERT INTO appointment (patientId,doctorId,appointment_date) VALUES ($patientId,$doctorId,"$formatedDate");';
     await sqlClient.execute(sqlQuery);
   }
 
   ///update the list
-  Future<void> updateList(String patientId, String doctorId,
-      String appointmentDate, String appointmentId) async {
+  Future<void> updateList(int patientId, int doctorId, String appointmentDate,
+      String appointmentId) async {
+    final formatedDate =
+        DateFormat('yyyy-MM-dd HH:mm:ss').parse(appointmentDate);
     final sqlQuery =
-        'UPDATE appointment SET patientId = "$patientId" , doctorId = "$doctorId",appointment_date = "$appointmentDate" where appointmentId = $appointmentId;';
+        'UPDATE appointment SET patientId = $patientId , doctorId = $doctorId,appointment_date = "$formatedDate" where appointmentId = $appointmentId;';
     await sqlClient.execute(sqlQuery);
   }
 
