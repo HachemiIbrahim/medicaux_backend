@@ -2,16 +2,16 @@
 class DoctorStaffModel {
   // ignore: public_member_api_docs
   const DoctorStaffModel({
-    required this.patientId,
-    required this.doctorId,
+    required this.staffID,
+    required this.doctorID,
     required this.assignmentDate,
   });
 
   // ignore: public_member_api_docs
   factory DoctorStaffModel.fromJson(Map<String, dynamic> json) {
     return DoctorStaffModel(
-      patientId: json['patientId'] as int,
-      doctorId: json['doctorId'] as int,
+      staffID: json['staffID'] as int,
+      doctorID: json['doctorID'] as int,
       assignmentDate: json['assignmentDate'] as String,
     );
   }
@@ -19,21 +19,21 @@ class DoctorStaffModel {
   // ignore: public_member_api_docs
   factory DoctorStaffModel.fromRowAssoc(Map<String, String?> json) {
     return DoctorStaffModel(
-        patientId: int.parse(json['patientId']!),
-        doctorId: int.parse(json['doctorId']!),
+        staffID: int.parse(json['staffID']!),
+        doctorID: int.parse(json['doctorID']!),
         assignmentDate: json['assignmentDate']!);
   }
 
   // ignore: public_member_api_docs
   Map<String, dynamic> toJson() {
     return {
-      'patientId': patientId.toString(),
-      'doctorId': doctorId.toString(),
+      'staffID': staffID.toString(),
+      'doctorID': doctorID.toString(),
       'assignmentDate': assignmentDate
     };
   }
 
-  final int patientId;
-  final int doctorId;
+  final int staffID;
+  final int doctorID;
   final String assignmentDate;
 }
