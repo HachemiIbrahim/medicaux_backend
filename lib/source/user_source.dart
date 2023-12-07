@@ -11,10 +11,11 @@ class UserSource {
   );
 
   ///update the list
-  Future<void> checkUser(String username, String password) async {
+  Future<bool> checkUser(String username, String password) async {
     final sqlQuery =
-        'SELECT EXISTS( SELECT 1 FROM users WHERE username = "$username" AND password = "$password");';
-    await sqlClient.execute(sqlQuery);
+        'SELECT EXISTS( SELECT * FROM users WHERE username = "$username" AND password = "$password" )';
+    final result = await sqlClient.execute(sqlQuery);
+    return result.isNotEmpty;
   }
 
   /// accessing you client
