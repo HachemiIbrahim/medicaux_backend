@@ -20,6 +20,7 @@ Future<Response> _checkUser(RequestContext context) async {
     final username = body['username'] as String;
     final password = body['password'] as String;
     final exists = await dataRepository.checkUser(username, password);
+    print(exists);
     if (exists) {
       return Response(statusCode: HttpStatus.accepted);
     } else {

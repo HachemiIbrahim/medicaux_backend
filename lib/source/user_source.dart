@@ -13,9 +13,13 @@ class UserSource {
   ///update the list
   Future<bool> checkUser(String username, String password) async {
     final sqlQuery =
-        'SELECT EXISTS( SELECT * FROM users WHERE username = "$username" AND password = "$password" )';
+        'SELECT 1 FROM users WHERE username = "$username" AND password = "$password";';
     final result = await sqlClient.execute(sqlQuery);
-    return result.isNotEmpty;
+    if (result.numOfRows > 0) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /// accessing you client
