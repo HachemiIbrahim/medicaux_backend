@@ -16,7 +16,7 @@ class AppointementSource {
   Future<List<AppointmentModel>> fetchFields() async {
     // sqlQuey
     const sqlQuery =
-        'SELECT appointmentId,patientId,doctorId,appointment_date FROM appointment;';
+        'SELECT appointmentId, patient.name as patientName, doctors.name as doctorName, appointment_date FROM appointment JOIN patient ON appointment.patientId = patient.patientId JOIN doctors ON appointment.doctorId = doctors.doctorId;';
     final result = await sqlClient.execute(sqlQuery);
     final lists = <AppointmentModel>[];
     for (final row in result.rows) {
@@ -28,8 +28,7 @@ class AppointementSource {
   ///add a list to the database
   Future<void> addList(
       int patientId, int doctorId, String appointmentDate) async {
-    final formatedDate =
-        DateFormat('yyyy-MM-dd HH:mm:ss').parse(appointmentDate);
+    final formatedDate = DateFormat('yyyy-MM-dd HH:mm').parse(appointmentDate);
     final sqlQuery =
         'INSERT INTO appointment (patientId,doctorId,appointment_date) VALUES ($patientId,$doctorId,"$formatedDate");';
     await sqlClient.execute(sqlQuery);
