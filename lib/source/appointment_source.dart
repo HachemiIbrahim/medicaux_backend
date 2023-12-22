@@ -37,8 +37,7 @@ class AppointementSource {
   ///update the list
   Future<void> updateList(int patientId, int doctorId, String appointmentDate,
       String appointmentId) async {
-    final formatedDate =
-        DateFormat('yyyy-MM-dd HH:mm:ss').parse(appointmentDate);
+    final formatedDate = DateFormat('yyyy-MM-dd HH:mm').parse(appointmentDate);
     final sqlQuery =
         'UPDATE appointment SET patientId = $patientId , doctorId = $doctorId,appointment_date = "$formatedDate" where appointmentId = $appointmentId;';
     await sqlClient.execute(sqlQuery);
