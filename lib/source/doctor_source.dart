@@ -10,6 +10,13 @@ class DoctorSource {
   const DoctorSource(
     this.sqlClient,
   );
+  Future<int> doctorCount() async {
+    const sqlQuery = 'SELECT COUNT(*) AS total FROM doctors;';
+    final resultSet = await sqlClient.execute(sqlQuery);
+    final row = resultSet.rows.single;
+    final count = row.typedColAt<int>(0);
+    return count!;
+  }
 
   ///Fetches all table fields from list table in our database
   Future<List<DoctorModel>> fetchFields() async {

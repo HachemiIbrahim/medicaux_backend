@@ -9,10 +9,18 @@ Future<Response> onRequest(RequestContext context) async {
       return _getPatient(context);
     case HttpMethod.post:
       return _createPatient(context);
+    case HttpMethod.put:
+      return _numberPatient(context);
     // ignore: no_default_cases
     default:
       return Future.value(Response(statusCode: HttpStatus.methodNotAllowed));
   }
+}
+
+Future<Response> _numberPatient(RequestContext context) async {
+  final dataRepository = context.read<PatientSource>();
+  final num = await dataRepository.patientCount();
+  return Response.json(body: num);
 }
 
 Future<Response> _getPatient(RequestContext context) async {

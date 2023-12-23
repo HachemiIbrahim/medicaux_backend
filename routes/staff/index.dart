@@ -9,10 +9,18 @@ Future<Response> onRequest(RequestContext context) async {
       return _getStaff(context);
     case HttpMethod.post:
       return _createStaff(context);
+    case HttpMethod.put:
+      return _numberStaff(context);
     // ignore: no_default_cases
     default:
       return Future.value(Response(statusCode: HttpStatus.methodNotAllowed));
   }
+}
+
+Future<Response> _numberStaff(RequestContext context) async {
+  final dataRepository = context.read<StaffSource>();
+  final num = await dataRepository.staffCount();
+  return Response.json(body: num);
 }
 
 Future<Response> _getStaff(RequestContext context) async {

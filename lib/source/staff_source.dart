@@ -10,6 +10,13 @@ class StaffSource {
   const StaffSource(
     this.sqlClient,
   );
+  Future<int> staffCount() async {
+    const sqlQuery = 'SELECT COUNT(*) AS total FROM staff;';
+    final resultSet = await sqlClient.execute(sqlQuery);
+    final row = resultSet.rows.single;
+    final count = row.typedColAt<int>(0);
+    return count!;
+  }
 
   ///Fetches all table fields from list table in our database
   Future<List<StaffModel>> fetchFields() async {
