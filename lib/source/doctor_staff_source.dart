@@ -14,9 +14,8 @@ class DoctorStaffSource {
 
   ///Fetches all table fields from list table in our database
   Future<List<DoctorStaffModel>> fetchFields() async {
-    // sqlQuey
     const sqlQuery =
-        'SELECT staffID,doctorID,assignmentDate FROM doctor_staff;';
+        'SELECT d.doctorID, s.staffID, ds.assignmentDate, d.name AS doctorName, s.name AS staffName FROM doctor_staff ds JOIN doctors d ON ds.doctorID = d.doctorID JOIN staff s ON ds.staffID = s.staffID;';
     final result = await sqlClient.execute(sqlQuery);
     final lists = <DoctorStaffModel>[];
     for (final row in result.rows) {
@@ -28,8 +27,7 @@ class DoctorStaffSource {
   ///add a list to the database
   Future<void> addList(
       String staffId, String doctorId, String assignmentDate) async {
-    final formatedDate =
-        DateFormat('yyyy-MM-dd HH:mm:ss').parse(assignmentDate);
+    final formatedDate = DateFormat('yyyy-MM-dd HH:mm').parse(assignmentDate);
     final sqlQuery =
         'INSERT INTO doctor_staff (staffID,doctorID,assignmentDate) VALUES ("$staffId","$doctorId","$formatedDate");';
     await sqlClient.execute(sqlQuery);

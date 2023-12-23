@@ -6,22 +6,22 @@ import 'package:medicaux_backend/source/doctor_staff_source.dart';
 Future<Response> onRequest(RequestContext context) async {
   switch (context.request.method) {
     case HttpMethod.get:
-      return _getAppointment(context);
+      return _getDoctorStaff(context);
     case HttpMethod.post:
-      return _createAppointment(context);
+      return _createDoctorStafft(context);
     // ignore: no_default_cases
     default:
       return Future.value(Response(statusCode: HttpStatus.methodNotAllowed));
   }
 }
 
-Future<Response> _getAppointment(RequestContext context) async {
+Future<Response> _getDoctorStaff(RequestContext context) async {
   final dataRepository = context.read<DoctorStaffSource>();
   final lists = await dataRepository.fetchFields();
   return Response.json(body: lists);
 }
 
-Future<Response> _createAppointment(RequestContext context) async {
+Future<Response> _createDoctorStafft(RequestContext context) async {
   final dataRepository = context.read<DoctorStaffSource>();
   final body = await context.request.json() as Map<String, dynamic>;
   final staffId = body['staffId'] as String;
