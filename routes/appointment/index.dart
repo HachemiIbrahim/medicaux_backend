@@ -9,6 +9,8 @@ Future<Response> onRequest(RequestContext context) async {
       return _getAppointment(context);
     case HttpMethod.post:
       return _createAppointment(context);
+    case HttpMethod.put:
+      return _getTodayAppointment(context);
     // ignore: no_default_cases
     default:
       return Future.value(Response(statusCode: HttpStatus.methodNotAllowed));
@@ -18,6 +20,12 @@ Future<Response> onRequest(RequestContext context) async {
 Future<Response> _getAppointment(RequestContext context) async {
   final dataRepository = context.read<AppointementSource>();
   final lists = await dataRepository.fetchFields();
+  return Response.json(body: lists);
+}
+
+Future<Response> _getTodayAppointment(RequestContext context) async {
+  final dataRepository = context.read<AppointementSource>();
+  final lists = await dataRepository.fetchTodayAppointments();
   return Response.json(body: lists);
 }
 

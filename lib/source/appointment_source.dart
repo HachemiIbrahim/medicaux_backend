@@ -12,6 +12,17 @@ class AppointementSource {
     this.sqlClient,
   );
 
+  Future<List<AppointmentModel>> fetchTodayAppointments() async {
+    const sqlQuery =
+        'SELECT appointmentId, patient.name as patientName, doctors.name as doctorName, appointment_date FROM appointment JOIN patient ON appointment.patientId = patient.patientId JOIN doctors ON appointment.doctorId = doctors.doctorId WHERE DATE(appointment_date) = CURDATE();';
+    final result = await sqlClient.execute(sqlQuery);
+    final lists = <AppointmentModel>[];
+    for (final row in result.rows) {
+      lists.add(AppointmentModel.fromRowAssoc(row.assoc()));
+    }
+    return lists;
+  }
+
   ///Fetches all table fields from list table in our database
   Future<List<AppointmentModel>> fetchFields() async {
     // sqlQuey
