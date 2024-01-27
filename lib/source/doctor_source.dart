@@ -47,12 +47,6 @@ class DoctorSource {
 
   ///delete a list
   Future<void> deleteList(String doctorId) async {
-    await sqlClient
-        .execute('DELETE FROM doctor_staff WHERE doctorId = $doctorId;');
-    await sqlClient
-        .execute('DELETE FROM appointment WHERE doctorId = $doctorId;');
-    await sqlClient
-        .execute('DELETE FROM traitement WHERE doctorId = $doctorId;');
     final sqlQuery = 'DELETE FROM doctors WHERE doctorId = $doctorId;';
     await sqlClient.execute(sqlQuery);
   }
