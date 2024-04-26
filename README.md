@@ -4,8 +4,8 @@ The Medical Desktop App Backend serves as the backbone for your medical applicat
 
 
 ## Technologies Used
-Dart (Flutter): The backend is built using Dart, which allows seamless integration with your Flutter frontend.
-MySQL: A reliable and widely used relational database management system.
+Dart (Flutter): The backend is built using Dart, which allows seamless integration with your Flutter frontend.<br>
+MySQL: A reliable and widely used relational database management system.<br>
 
 ## API Endpoints
 Doctors:
